@@ -6,6 +6,15 @@ function App() {
   const[movieName, setMovieName] = useState("");
   const[review, setReview] = useState("");
 
+  const submitReview = () =>{
+    Axios.post('http://localhost:3001/api/insert', {
+    movieName: movieName, 
+    movieReview: review,
+    }).then(() =>{
+      alert("successful insert");
+    });
+  };
+
     return <div className="App">
       <h1>CRUD APPLICATION</h1>
       <div className="form">
@@ -18,10 +27,16 @@ function App() {
           setReview(e.target.value)
         }}/>
 
-        <button>Submit</button>
+        <button onClick={submitReview}>Submit</button>
       </div>
 
     </div>;
+}
+
+function Reservation() {
+  return<div className="Reservationform">
+    <h1>THIS IS THE RESERVATION FORM</h1>
+  </div>
 }
 
 export default App;
