@@ -74,6 +74,8 @@ app.post('/login', (req,res)=>{
 app.post('/reservation', (req,res)=>{
     const email=req.body.email
     const name=req.body.name
+    const bmail=req.body.bmail
+    const mmail=req.body.mmail
     const phone=req.body.phone
     const date=req.body.date
     const time=req.body.time
@@ -89,8 +91,12 @@ app.post('/reservation', (req,res)=>{
             }
             //IF A MATCH IS **NOT** FOUND, MAKE THE RESERVATION, RETURN MESSAGE TO THE USER.
             if(result.length == 0){
-                db.query("INSERT INTO reservations (email, name, phone, date, time, guest) VALUES (?,?,?,?,?,?)",
-                [email, name, phone, date, time, guest])
+                db.query("INSERT INTO reservations (email, name, billing_address, mailing_address, phone, date, time, guest) VALUES (?,?,?,?,?,?,?,?)",
+                [email, name, bmail, mmail, phone, date, time, guest],
+                (err, result)=>{
+                    console.log(result)
+                    console.log(err);
+                })
                 console.log(result);
                 res.send({message:"Thank you for the reservation!"});
             }

@@ -13,6 +13,7 @@ const Reserve = () => {
     const [timeReg, setTimeReg] = useState('')
     const [guestReg, setGuestReg] = useState('')
     const [billingaddReg, setBillingAddressReg] = useState('')
+    const [mailingaddReg, setMailingAddressReg] = useState('')
 
     const [reservationStatus, setReservationStatus]=useState('')
     const{loggedIn, setLogIn}=useContext(LogInContext)
@@ -21,11 +22,13 @@ const Reserve = () => {
         Axios.post('http://localhost:3001/reservation', {
         email:emailReg,
         name:nameReg,
+        billingadd:billingaddReg,
+        mailingadd:mailingaddReg,
         phone:phoneReg,
         date:dateReg,
         time:timeReg,
         guest:guestReg,
-        billingadd:billingaddReg,
+        
         }).then((response)=>{
         if(response.data.message){
             setReservationStatus(response.data.message);
@@ -71,7 +74,7 @@ const Reserve = () => {
 
                         <label>Mailing address:</label>
                         <textarea name="m_address" onChange = {(e)=>{
-                            setBillingAddressReg(e.target.value)
+                            setMailingAddressReg(e.target.value)
                         }}/>
 
                         <label>Phone:</label>
@@ -117,7 +120,7 @@ const Reserve = () => {
                         }}/>
 
                         <label>Name:</label>
-                        <input type="text" name="name" onChange = {(e)=>{
+                        <input type="text" name="naem" onChange = {(e)=>{
                             setNameReg(e.target.value)
                         }}/>
                         
@@ -132,7 +135,7 @@ const Reserve = () => {
 
                         <label>Mailing address:</label>
                         <textarea name="m_address" onChange = {(e)=>{
-                            setBillingAddressReg(e.target.value)
+                            setMailingAddressReg(e.target.value)
                         }}/>
 
                         <label>Phone:</label>
