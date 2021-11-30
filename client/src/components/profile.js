@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import {Navigate} from 'react-router-dom'
 import { LogInContext } from "../helper/Context";
 import {useNavigate} from "react-router-dom"
+
 const Profile = () => {
     const navigate= useNavigate();
     const{loggedIn, setLogIn}=useContext(LogInContext)

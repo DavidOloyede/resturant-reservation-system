@@ -71,11 +71,26 @@ app.post('/login', (req,res)=>{
     );
 });
 
+app.post('/holidaychecker', (req,res)=>{
+    const date = req.body.date
+    db.query("SELECT 1 FROM holidays WHERE (date) = (?)",
+    [date],
+    (err, result)=>{
+        if(result){
+            res.send({message:"This is a holiday."});
+        }
+        if(err){
+            console.log(err);
+            res.send({message:"error"})
+        }
+    })
+});
+
 app.post('/reservation', (req,res)=>{
     const email=req.body.email
     const name=req.body.name
-    const bmail=req.body.bmail
-    const mmail=req.body.mmail
+    const billingadd=req.body.billingadd
+    const mailingadd=req.body.mailingadd
     const phone=req.body.phone
     const date=req.body.date
     const time=req.body.time
@@ -92,7 +107,7 @@ app.post('/reservation', (req,res)=>{
             //IF A MATCH IS **NOT** FOUND, MAKE THE RESERVATION, RETURN MESSAGE TO THE USER.
             if(result.length == 0){
                 db.query("INSERT INTO reservations (email, name, billing_address, mailing_address, phone, date, time, guest) VALUES (?,?,?,?,?,?,?,?)",
-                [email, name, bmail, mmail, phone, date, time, guest],
+                [email, name, billingadd, mailingadd, phone, date, time, guest],
                 (err, result)=>{
                     console.log(result)
                     console.log(err);

@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import React, {useState, useContext} from 'react';
 import { LogInContext } from "../helper/Context";
-import {useNavigate} from "react-router-dom"
+import {useNavigate} from "react-router-dom";
 
 const Reserve = () => {
     const navigate = useNavigate;
@@ -16,7 +16,19 @@ const Reserve = () => {
     const [mailingaddReg, setMailingAddressReg] = useState('')
 
     const [reservationStatus, setReservationStatus]=useState('')
+    const [holidayStatus, setHolidayStatus]=useState('')
     const{loggedIn, setLogIn}=useContext(LogInContext)
+
+    const holidayChecker=()=>{
+        Axios.post('http://localhost:3001/holidaychecker',{
+            date:dateReg,
+        }).then((response)=>{
+            if(response.data.message){
+                console.log(response);
+                setHolidayStatus(response.data.message);
+            }
+        });
+    };
 
     const postReservation=()=>{
         Axios.post('http://localhost:3001/reservation', {
@@ -40,7 +52,8 @@ const Reserve = () => {
         var billingaddy = document.getElementById('b_address');
         var mailingaddy = document.getElementById('m_address');
         mailingaddy.value = billingaddy.value  
-    }
+    };
+
 
     return (
         <div>
@@ -59,12 +72,12 @@ const Reserve = () => {
                         }}/>
 
                         <label>Name:</label>
-                        <input type="text" name="name" onChange = {(e)=>{
+                        <input type="text" name="naem" onChange = {(e)=>{
                             setNameReg(e.target.value)
                         }}/>
                         
                         <label>Billing address:</label>
-                        <textarea name="b_address" onChange = {(e)=>{
+                        <input type="text" name="b_address" onChange = {(e)=>{
                             setBillingAddressReg(e.target.value)
                         }}/>
 
@@ -73,7 +86,7 @@ const Reserve = () => {
                         <input type="checkbox" onclick={sameAddress}/>
 
                         <label>Mailing address:</label>
-                        <textarea name="m_address" onChange = {(e)=>{
+                        <input type="text" name="m_address" onChange = {(e)=>{
                             setMailingAddressReg(e.target.value)
                         }}/>
 
@@ -89,7 +102,7 @@ const Reserve = () => {
                         }}></input>
 
                         <lable>Time:</lable>
-                        <input type="time" name="time" onChange = {(e)=>{
+                        <input type="time" name="time" placeholder="00:00" onChange = {(e)=>{
                             setTimeReg(e.target.value)
                         }}></input>
 
@@ -125,7 +138,7 @@ const Reserve = () => {
                         }}/>
                         
                         <label>Billing address:</label>
-                        <textarea name="b_address" onChange = {(e)=>{
+                        <input type="text" name="b_address" onChange = {(e)=>{
                             setBillingAddressReg(e.target.value)
                         }}/>
 
@@ -134,7 +147,7 @@ const Reserve = () => {
                         <input type="checkbox" onclick={sameAddress}/>
 
                         <label>Mailing address:</label>
-                        <textarea name="m_address" onChange = {(e)=>{
+                        <input type="text" name="m_address" onChange = {(e)=>{
                             setMailingAddressReg(e.target.value)
                         }}/>
 
@@ -150,7 +163,7 @@ const Reserve = () => {
                         }}></input>
 
                         <lable>Time:</lable>
-                        <input type="time" name="time" onChange = {(e)=>{
+                        <input type="time" name="time" placeholder="00:00" onChange = {(e)=>{
                             setTimeReg(e.target.value)
                         }}></input>
 
