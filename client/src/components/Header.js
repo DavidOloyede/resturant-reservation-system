@@ -78,6 +78,7 @@ export const Header = () => {
           <div className="form">
             <label>Email</label>
             <input
+              className="input"
               type="email"
               name="registerEmail"
               onChange={(e) => {
@@ -87,6 +88,7 @@ export const Header = () => {
 
             <label>First Name</label>
             <input
+              className="input"
               type="text"
               name="firstName"
               onChange={(e) => {
@@ -96,6 +98,7 @@ export const Header = () => {
 
             <label>Last Name</label>
             <input
+              className="input"
               type="text"
               name="lastName"
               onChange={(e) => {
@@ -105,6 +108,7 @@ export const Header = () => {
 
             <label>Password:</label>
             <input
+              className="input"
               type="password"
               name="registerPassword"
               onChange={(e) => {
@@ -123,6 +127,7 @@ export const Header = () => {
           <div className="form">
             <label>Email:</label>
             <input
+              className="input"
               type="text"
               name="email"
               onChange={(e) => {
@@ -131,6 +136,7 @@ export const Header = () => {
             />
             <label>Password:</label>
             <input
+              className="input"
               type="password"
               name="review"
               onChange={(e) => {

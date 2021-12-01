@@ -199,18 +199,24 @@ const Reserve = () => {
           <div className="form">
             <label>Date:</label>
             <input
+              className="input"
               type="date"
               name="date"
               onChange={(e) => {
                 setDate(e.target.value);
               }}
             />
-            <button className="button" onClick={holidayChecker}>
+            <button
+              className="button"
+              style={{ fontSize: "15px" }}
+              onClick={holidayChecker}
+            >
               <span>Check daily fee</span>
             </button>
             <p>{holidayStatus} </p>
             <label>Number of Guests:</label>
             <input
+              className="input"
               type="number"
               min="0"
               required
@@ -218,7 +224,11 @@ const Reserve = () => {
                 setGuest(e.target.value);
               }}
             />
-            <button className="button" onClick={findTimes}>
+            <button
+              className="button"
+              style={{ fontSize: "15px" }}
+              onClick={findTimes}
+            >
               <span>Find Times</span>
             </button>
           </div>
@@ -233,7 +243,11 @@ const Reserve = () => {
               >
                 {timeOptions}
               </select>
-              <button className="button" onClick={findTables}>
+              <button
+                className="button"
+                style={{ fontSize: "15px" }}
+                onClick={findTables}
+              >
                 <span>Find Available Tables</span>
               </button>
               <p>{tableStatus} </p>
@@ -245,6 +259,7 @@ const Reserve = () => {
             <div className="form">
               <label>Email:</label>
               <input
+                className="input"
                 type="email"
                 name="registerEmail"
                 onChange={(e) => {
@@ -254,6 +269,7 @@ const Reserve = () => {
 
               <label>Name:</label>
               <input
+                className="input"
                 type="text"
                 name="naem"
                 onChange={(e) => {
@@ -263,6 +279,7 @@ const Reserve = () => {
 
               <label>Billing address:</label>
               <input
+                className="input"
                 name="b_address"
                 onChange={(e) => {
                   setBillingAddressReg(e.target.value);
@@ -275,6 +292,7 @@ const Reserve = () => {
 
               <label>Mailing address:</label>
               <input
+                className="input"
                 name="m_address"
                 onChange={(e) => {
                   setMailingAddressReg(e.target.value);
@@ -283,13 +301,18 @@ const Reserve = () => {
 
               <label>Phone:</label>
               <input
+                className="input"
                 type="tel"
                 name="telephone"
                 onChange={(e) => {
                   setPhoneReg(e.target.value);
                 }}
               ></input>
-              <button className="button" onClick={postReservation}>
+              <button
+                className="button"
+                style={{ fontSize: "20px" }}
+                onClick={postReservation}
+              >
                 <span>Final Submit</span>
               </button>
               <h1>{reservationStatus} </h1>
