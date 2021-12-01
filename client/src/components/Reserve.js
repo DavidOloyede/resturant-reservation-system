@@ -100,6 +100,8 @@ const Reserve = () => {
                         <input id="datefield" type="date" name="date" min="1899-01-01" onChange = {(e)=>{
                             setDateReg(e.target.value)
                         }}></input>
+                        <button onClick={holidayChecker}>Holiday</button>
+                        <h1>{holidayStatus} </h1>
 
                         <lable>Time:</lable>
                         <input type="time" name="time" placeholder="00:00" onChange = {(e)=>{
@@ -161,6 +163,8 @@ const Reserve = () => {
                         <input id="datefield" type="date" name="date" min="1899-01-01" onChange = {(e)=>{
                             setDateReg(e.target.value)
                         }}></input>
+                        <button onClick={holidayChecker}>Holiday</button>
+                        <h1>{holidayStatus} </h1>
 
                         <lable>Time:</lable>
                         <input type="time" name="time" placeholder="00:00" onChange = {(e)=>{

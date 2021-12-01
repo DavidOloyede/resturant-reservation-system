@@ -76,12 +76,10 @@ app.post('/holidaychecker', (req,res)=>{
     db.query("SELECT 1 FROM holidays WHERE (date) = (?)",
     [date],
     (err, result)=>{
-        if(result){
-            res.send({message:"This is a holiday."});
-        }
-        if(err){
-            console.log(err);
-            res.send({message:"error"})
+        if(result.length > 0){
+            res.send({message:"You've selected a holiday, a holding fee will be assessed."});
+        }else{
+            res.send({message:"Continue to finalize reservation."})
         }
     })
 });
