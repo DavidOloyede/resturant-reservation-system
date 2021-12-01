@@ -5,16 +5,15 @@ const mysql = require('mysql');
 const cors= require("cors");
 const e = require('express');
 
-/*
 const db = mysql.createPool({
     host: 'localhost', //change necessary information 
+    port: '3306',
     user: 'root',
-    password: 'password',
+    password: '123456789root',
     database: 'cruddatabase',
 });
-*/
 
-
+/*
 const db = mysql.createPool({
     host: 'localhost', //change necessary information 
     port: '3306',
@@ -22,7 +21,7 @@ const db = mysql.createPool({
     password: 'password',
     database: '4351project',
 });
-
+*/
 //The following bulk code was used to check if the connection to the server was working. Use as test if needed.
 
 /*
@@ -76,8 +75,10 @@ app.post('/holidaychecker', (req,res)=>{
     db.query("SELECT 1 FROM holidays WHERE (date) = (?)",
     [date],
     (err, result)=>{
-        if(result){
-            res.send({message:"This is a holiday."});
+        if(result.length>0){
+            res.send({message:"This is a holiday. Becuase of the high traffic an extra fee will be applied"});
+        }else{
+            res.send({message:"Not a high traffic day so we retain our regular fees"})
         }
         if(err){
             console.log(err);
@@ -85,6 +86,59 @@ app.post('/holidaychecker', (req,res)=>{
         }
     })
 });
+
+app.post('/reservationTimes', (req,res)=>{
+    const Date= req.body.Date
+    const times=["8:00 AM", "10:00 AM","12:00 PM","2:00 PM","4:00 PM","6:00 PM","8:00 PM","10:00 PM","12:00 AM"]
+    db.query("SELECT * FROM reservations WHERE date = ?",
+    [Date],
+    (err, result)=>{
+        if(err){
+            res.send({err:err});
+        }
+
+        if(result.length>0){
+            res.send(result);
+        }else{
+            
+            for(let x=0; x<times.length; x++){
+                var datePlusTime= Date+''+times[x]
+                db.query("INSERT INTO availableTables (id) VALUES (?)",
+                    [datePlusTime]
+                )
+            }
+
+            res.send({message:"All times available"});
+            
+        }
+        console.log(err)
+    }
+    );
+});
+
+app.post('/findtables', (req,res)=>{
+    const Date=req.body.Date
+    const Time= req.body.time
+    const guest= req.body.guestNum
+    console.log(Time)
+    var datePlusTime= Date+''+Time
+    db.query("SELECT * FROM availableTables WHERE id= ?",
+    [datePlusTime],
+    (err, result)=>{
+        if(err){
+            res.send({err:err});
+        }
+
+        if(result.length>0){
+            res.send(result);
+        }else{
+            res.send({message:"All tables available"})
+        }
+        console.log(err)
+    }
+    );
+})
+
 
 app.post('/reservation', (req,res)=>{
     const email=req.body.email
@@ -119,6 +173,7 @@ app.post('/reservation', (req,res)=>{
     );
 
 });
+
 
 //app.get("/", (req, res) =>{});
 
